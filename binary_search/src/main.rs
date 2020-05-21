@@ -4,24 +4,29 @@ fn main() {
     let mut buf = String::new();
     stdin().read_line(&mut buf).unwrap();
     let raw_iter = buf.split_whitespace();
+    let mut input: Vec<usize> = raw_iter.map(|x| x.parse::<usize>().unwrap()).collect();
+    // println!("input - {:?}", input);
 
-    let input: Vec<usize> = raw_iter.map(|x| x.parse::<usize>().unwrap()).collect();
-    println!("input - {:?}", input);
+    let mut buf2 = String::new();
+    stdin().read_line(&mut buf2).unwrap();
+    let raw_iter2 = buf2.split_whitespace();
+    let mut keys: Vec<usize> = raw_iter2.map(|x| x.parse::<usize>().unwrap()).collect();
+    input.remove(0);
+    keys.remove(0);
+    let low = 0;
+    let high = input.len() - 1;
+    let mut output = String::new();
+    // println!("keys - {:?}", keys);
+    // println!("input - {:?}", input);
 
-    // for v in raw_iter {
-    //     println!("v - {}", v);
-    // }
-    // if let Some(i) = raw_iter.next() {
-    //     let n = i.parse::<i64>().unwrap();
-    // }
-
-    // let input: Vec<usize> = vec![1, 5, 8, 12, 13];
-    // let key: usize = 23;
-    // let high = input.len() - 1;
-    // let low = 0;
-    // let keys: Vec<usize> = vec![8, 1, 23, 1, 11];
     // println!("{:?}", linear_search(input, keys));
-    // println!("{:?}", binary_search(input, low, high, key));
+    for key in keys {
+        let result = binary_search(input.clone(), low, high, key);
+        output.push_str(&result.to_string());
+        output.push_str(" ");
+        // println!("{}", binary_search(input.clone(), low, high, key));
+    }
+    println!("{}", output);
 }
 
 // fn linear_search(input: Vec<usize>, keys: Vec<usize>) -> Vec<i64> {
